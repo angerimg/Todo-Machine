@@ -13,15 +13,14 @@ function TodoProvider(props) {
   
     let searchedTodos = [];
   
-    if(searchValue.length>=1){
+    if(searchValue.length == "") {
       searchedTodos = todos;
     } else {
       searchedTodos = todos.filter(todo => {
         const todoText=todo.text.toLowerCase();
         const searchText = searchValue.toLocaleLowerCase();
         return  todoText.includes(searchText);
-      })
-       
+      }) 
     }
   
   
@@ -30,8 +29,8 @@ function TodoProvider(props) {
       const newTodos = [...todos];
       newTodos[todoIndex].completed = true;
       saveTodos(newTodos);
-  
     }
+
     const addTodo = (text) => {
       const newTodos = [...todos];
       newTodos.push({
@@ -39,7 +38,6 @@ function TodoProvider(props) {
         text,
       })
       saveTodos(newTodos);
-  
     }
   
     const deleteTodos =(text) =>{
@@ -48,11 +46,6 @@ function TodoProvider(props) {
       newTodos.splice(todoIndex,1)
       saveTodos(newTodos);
     }
-  
-    React.useEffect(()=>{
-      console.log("pasando por aqui")
-    })
-
 
     return (
         <TodoContext.Provider value = {{
